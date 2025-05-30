@@ -70,8 +70,9 @@ window.addEventListener('DOMContentLoaded', function () {
         let name = card.name.toUpperCase();
         let artist = card.artist;
 
-        let cardmarket = "";
-        if (card.cardmarket.url !== undefined) {
+        let cardmarket = "https://www.cardmarket.com/es/Pokemon";
+        if (card.cardmarket?.url)//only if cardmarket exists
+        {
             cardmarket = card.cardmarket.url;
         }
         let legalities = card.legalities.unlimited;
@@ -81,14 +82,14 @@ window.addEventListener('DOMContentLoaded', function () {
         let setName = card.set.name;
         let setImage = card.set.images.logo;
 
-        let prices = card.tcgplayer.prices;
-        let priceHTML = '';
+        // let prices = card.tcgplayer.prices;
+        // let priceHTML = '';
 
-        Object.entries(prices).forEach(([type, priceData]) => {
-            if (priceData.mid !== undefined) {
-                priceHTML += `<p><strong>${type} Mid Price:</strong> $${priceData.mid}</p>`;
-            }
-        });
+        // Object.entries(prices).forEach(([type, priceData]) => {
+        //     if (priceData.mid !== undefined) {
+        //         priceHTML += `<p><strong>${type} Mid Price:</strong> $${priceData.mid}</p>`;
+        //     }
+        // });
 
         if (card.supertype == "Pokémon") {
             let hp = card.hp;
@@ -100,15 +101,29 @@ window.addEventListener('DOMContentLoaded', function () {
                 <p><strong>HP: ${hp}</strong></p>
                 <p><strong>Main Type: ${mainType}</strong></p>
                 <p><strong><strong>Artist: </strong>${artist}</p>
-                ${priceHTML}
-                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;"><strong style="color: black;">CardMaket: </strong> Link</a>
+                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
                 <p><strong>Set: ${setName}</strong></p>
                 <img src="${setImage}" width="80%"></img>
             `;
+
+            // divInfo.innerHTML = `
+            //     <p><strong>Legality: ${legalities}</strong></p>
+            //     <p><strong>Name: ${name}</strong></p>
+            //     <p><strong>HP: ${hp}</strong></p>
+            //     <p><strong>Main Type: ${mainType}</strong></p>
+            //     <p><strong><strong>Artist: </strong>${artist}</p>
+            //     ${priceHTML}
+            //     <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
+            //     <p><strong>Set: ${setName}</strong></p>
+            //     <img src="${setImage}" width="80%"></img>
+            // `;
         }
         else {
             divInfo.innerHTML = `
+                <p><strong>Legality: ${legalities}</strong></p>
                 <p><strong>Name: ${name}</strong></p>
+                <p><strong><strong>Artist: </strong>${artist}</p>
+                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
                 <p><strong>Set: ${setName}</strong></p>
                 <img src="${setImage}" width="80%"></img>
             `;

@@ -12,15 +12,10 @@ button {
     margin: 0.5rem;
 }
 
-<<<<<<< Updated upstream
 input
 {
     width: 60%; /* Use percentage */
     max-width: 200px; /* Optional cap */
-=======
-input {
-    width: 150px;
->>>>>>> Stashed changes
 }
 
 #cardBox {
@@ -36,16 +31,10 @@ input {
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-<<<<<<< Updated upstream
 #cardImg
 {
     width: 100%;         /* scale with container */
     height: auto;        /* preserve aspect ratio */
-=======
-#cardImg {
-    width: 367px;
-    height: 512px;
->>>>>>> Stashed changes
     image-rendering: pixelated;
     max-width: 367px;    /* don't go beyond original size */
 }
@@ -53,10 +42,7 @@ input {
 #cardInfo p {
     margin: 0.3rem 0;
 }
-<<<<<<< Updated upstream
-=======
 
 #cardmarket:hover {
     color: lightskyblue;
 }
->>>>>>> Stashed changes
