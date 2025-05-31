@@ -82,49 +82,57 @@ window.addEventListener('DOMContentLoaded', function () {
         let setName = card.set.name;
         let setImage = card.set.images.logo;
 
-        // let prices = card.tcgplayer.prices;
-        // let priceHTML = '';
+        let priceHTML = '';
+        if (card.cardmarket?.prices)
+        {
+            const prices = card.cardmarket.prices;
+            
+            if (prices.avg1 !== undefined)
+            {
+                priceHTML += `<p><strong>Average:</strong> €${prices.avg1}</p>`;
+            }
 
-        // Object.entries(prices).forEach(([type, priceData]) => {
-        //     if (priceData.mid !== undefined) {
-        //         priceHTML += `<p><strong>${type} Mid Price:</strong> $${priceData.mid}</p>`;
-        //     }
-        // });
+            if (prices.reverseHoloAvg1 !== undefined && prices.reverseHoloAvg1 !== 0)
+            {
+                priceHTML += `<p><strong>ReverseHolo Average:</strong> €${prices.reverseHoloAvg1}</p>`;
+            }
+        }
+        else if (card.tcgplayer?.prices)
+        {
+            Object.entries(card.tcgplayer.prices).forEach(([type, priceData]) =>
+            {
+                if (priceData.mid !== undefined)
+                {
+                    priceHTML += `<p><strong>${type} Mid Price:</strong> $${priceData.mid}</p>`;
+                }
+            });
+        }
+        
 
         if (card.supertype == "Pokémon") {
             let hp = card.hp;
             let mainType = card.types[0];
 
             divInfo.innerHTML = `
-                <p><strong>Legality: ${legalities}</strong></p>
-                <p><strong>Name: ${name}</strong></p>
-                <p><strong>HP: ${hp}</strong></p>
-                <p><strong>Main Type: ${mainType}</strong></p>
-                <p><strong><strong>Artist: </strong>${artist}</p>
-                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
-                <p><strong>Set: ${setName}</strong></p>
+                <p><strong>Name: </strong>${name}</p>
+                <p><strong>HP: </strong>${hp}</p>
+                <p><strong>Main Type: </strong>${mainType}</p>
+                <p><strong>Artist: </strong>${artist}</p>
+                ${priceHTML}
+                <p><strong>CardMaket: </strong><a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"> Link</a></p>
+                <p><strong>Legality: </strong>${legalities}</p>
+                <p><strong>Set: </strong>${setName}</p>
                 <img src="${setImage}" width="80%"></img>
             `;
-
-            // divInfo.innerHTML = `
-            //     <p><strong>Legality: ${legalities}</strong></p>
-            //     <p><strong>Name: ${name}</strong></p>
-            //     <p><strong>HP: ${hp}</strong></p>
-            //     <p><strong>Main Type: ${mainType}</strong></p>
-            //     <p><strong><strong>Artist: </strong>${artist}</p>
-            //     ${priceHTML}
-            //     <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
-            //     <p><strong>Set: ${setName}</strong></p>
-            //     <img src="${setImage}" width="80%"></img>
-            // `;
         }
         else {
             divInfo.innerHTML = `
-                <p><strong>Legality: ${legalities}</strong></p>
-                <p><strong>Name: ${name}</strong></p>
-                <p><strong><strong>Artist: </strong>${artist}</p>
-                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong style="color: black;">CardMaket: </strong> Link</a>
-                <p><strong>Set: ${setName}</strong></p>
+                <p><strong>Name: </strong>${name}</p>
+                <p><strong>Artist: </strong>${artist}</p>
+                ${priceHTML}
+                <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong>CardMaket: </strong> Link</a>
+                <p><strong>Legality: </strong>${legalities}</p>
+                <p><strong>Set: </strong>${setName}</p>
                 <img src="${setImage}" width="80%"></img>
             `;
         }
