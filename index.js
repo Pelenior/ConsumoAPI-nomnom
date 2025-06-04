@@ -2,9 +2,11 @@ window.addEventListener('DOMContentLoaded', function () {
     //get the elements using the DOM
     let btnAsk = document.getElementById("btnAsk");
     let btnNext = this.document.getElementById("btnNext");
+    let btnPrev = this.document.getElementById("btnPrev");
     let cardInput = this.document.getElementById("cardInp");
     let cardImg = this.document.getElementById("cardImg");
     let divInfo = this.document.getElementById("cardInfo");
+    let divCounter = this.document.getElementById("counterDiv");
     let cardName;
 
     let globalData;
@@ -21,10 +23,6 @@ window.addEventListener('DOMContentLoaded', function () {
     })
 
     function askCard() {
-        if (cardName == cardInput.value) {
-            console.log("Same search, not consuming API");
-            return;
-        }
         cardName = cardInput.value;
         cardId = 0;
 
@@ -67,7 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         let urlImg = card.images.large;
-        let name = card.name.toUpperCase();
+        let name = card.name;
         let artist = card.artist;
 
         let cardmarket = "https://www.cardmarket.com/es/Pokemon";
@@ -81,6 +79,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
         let setName = card.set.name;
         let setImage = card.set.images.logo;
+
+        let totalCards = data.data.length;
+
+        divCounter.innerHTML = `<p>${cardId + 1}/${totalCards}</p>`;
 
         let priceHTML = '';
         if (card.cardmarket?.prices)

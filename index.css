@@ -18,7 +18,13 @@ input
     max-width: 200px; /* Optional cap */
 }
 
-#cardBox {
+a
+{
+    text-decoration: none;
+    color: black;
+}
+
+#cardBox, #setBox {
     margin-top: 2rem;
     padding: 1rem;
     border: 3px solid #ccc;
