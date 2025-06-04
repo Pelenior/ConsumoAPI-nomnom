@@ -85,38 +85,32 @@ window.addEventListener('DOMContentLoaded', function () {
         divCounter.innerHTML = `<p>${cardId + 1}/${totalCards}</p>`;
 
         let priceHTML = '';
-        if (card.cardmarket?.prices)
-        {
+        if (card.cardmarket?.prices) {
             const prices = card.cardmarket.prices;
-            
-            if (prices.avg1 !== undefined)
-            {
+
+            if (prices.avg1 !== undefined) {
                 priceHTML += `<p><strong>Average:</strong> €${prices.avg1}</p>`;
             }
 
-            if (prices.reverseHoloAvg1 !== undefined && prices.reverseHoloAvg1 !== 0)
-            {
+            if (prices.reverseHoloAvg1 !== undefined && prices.reverseHoloAvg1 !== 0) {
                 priceHTML += `<p><strong>ReverseHolo Average:</strong> €${prices.reverseHoloAvg1}</p>`;
             }
         }
-        else if (card.tcgplayer?.prices)
-        {
-            Object.entries(card.tcgplayer.prices).forEach(([type, priceData]) =>
-            {
-                if (priceData.mid !== undefined)
-                {
+        else if (card.tcgplayer?.prices) {
+            Object.entries(card.tcgplayer.prices).forEach(([type, priceData]) => {
+                if (priceData.mid !== undefined) {
                     priceHTML += `<p><strong>${type} Mid Price:</strong> $${priceData.mid}</p>`;
                 }
             });
         }
-        
+
 
         if (card.supertype == "Pokémon") {
             let hp = card.hp;
             let mainType = card.types[0];
 
             divInfo.innerHTML = `
-                <p><strong>Name: </strong>${name}</p>
+                <p style="margin-top:10px;"><strong>Name: </strong>${name}</p>
                 <p><strong>HP: </strong>${hp}</p>
                 <p><strong>Main Type: </strong>${mainType}</p>
                 <p><strong>Artist: </strong>${artist}</p>
@@ -129,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         else {
             divInfo.innerHTML = `
-                <p><strong>Name: </strong>${name}</p>
+                <p style="margin-top:10px;"><strong>Name: </strong>${name}</p>
                 <p><strong>Artist: </strong>${artist}</p>
                 ${priceHTML}
                 <a href="${cardmarket}" class="cardmarket" style="text-decoration: none;" target="_blank"><strong>CardMaket: </strong> Link</a>
